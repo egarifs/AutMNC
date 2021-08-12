@@ -7,10 +7,6 @@ class DashboardPage():
     TOAST_LOGIN_SUCCES = (By.CSS_SELECTOR, "Vue-Toastification__toast-body")
     PROFILE_NAME = (By.CSS_SELECTOR,"h1.font-bold.text-3xl")
 
-    
-
-
-
 
     def __init__(self, browser: webdriver.Remote):
         self.driver = browser
