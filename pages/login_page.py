@@ -6,21 +6,22 @@ from selenium.webdriver.common.keys import Keys
 
 
 class LoginPage():
+
     #Locator
     EMAIL = (By.ID, "ui-sign-in-email-input")
+    SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".mdl-button--colored")
+
     EMAIL_EMPTY_ALERT = (By.CSS_SELECTOR, ".firebaseui-id-email-error")
     EMAIL_INVALID = (By.CSS_SELECTOR, ".firebaseui-id-email-error")
     NEXT_BUTTON = (By.CSS_SELECTOR, ".firebaseui-id-submit")
-    SIGN_IN_BUTTON = (By.CSS_SELECTOR, ".mdl-button--colored")
     BUTTON_SIGN = (By.XPATH, "//button[contains(text(),'Sign In')]")
     PASSWORD = (By.ID,"ui-sign-in-password-input")
     # PASSWORD_ALERT = (By.CSS_SELECTOR,".firebaseui-error.firebaseui-text-input-error.firebaseui-id-password-error")
     # PASSWORD_ALERT = (By.CSS_SELECTOR,"p.firebaseui-id-password-error")
-    PASSWORD_ALERT = (By.CSS_SELECTOR,  "//p[contains(text(),'The email and password you entered don't match')]")
-
+    PASSWORD_ALERT = (By.XPATH,  "/html/body/div[2]/div/div/div[2]/div[1]/div/form/div[2]/div[4]")
     PASSWORD_TO_MANY = (By.XPATH, "//p[contains(text(),'You have entered an incorrect password too many ti')]")
-
     ALERT_ERROR = (By.CSS_SELECTOR, ".firebaseui-error")
+
 
     #method constructor
     def __init__(self, browser:webdriver.Remote):
@@ -67,9 +68,9 @@ class LoginPage():
         email_empty_alert = WebDriverWait(self.driver, 3000).until(EC.presence_of_element_located(self.EMAIL_EMPTY_ALERT))
         return email_empty_alert.text
 
-    def get_password_alert(self):
-        text_input_error = self.driver.find_element(*self.PASSWORD_ALERT)
-        return text_input_error.text
+    # def get_password_alert(self):
+    #     text_input_error = self.driver.find_element(*self.PASSWORD_ALERT)
+    #     return text_input_error.text
 
     def get_password_invalid(self):
         # txt_password_invalid = WebDriverWait(self.driver, 3000).until(EC.presence_of_element_located(self.PASSWORD_ALERT))
@@ -79,6 +80,8 @@ class LoginPage():
     def get_password_invalid_repeat(self):
         txt_password_invalid = self.driver.find_element(*self.PASSWORD_TO_MANY)
         return txt_password_invalid.text
+
+
 
 
 

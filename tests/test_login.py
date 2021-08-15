@@ -12,7 +12,8 @@ class TestLogin():
         login_page.click_next_button()
         login_page.set_password("@MisterA1")
         login_page.click_sign_button()
-        assert dashboard.get_profile_name() == "Dashboard Explore"
+        # dashboard.wait_toast_login()
+        assert dashboard.get_toast_login() == "Logging in"
 
     def test_email_empty(self, browser):
         login_page = LoginPage(browser)
@@ -35,7 +36,7 @@ class TestLogin():
         login_page.click_next_button()
         login_page.set_password("")
         login_page.click_sign_button()
-        assert login_page.get_password_alert() == "Enter your password"
+        assert login_page.get_password_invalid() == "Enter your password"
 
     #wip
     def test_password_invalid(self, browser):
